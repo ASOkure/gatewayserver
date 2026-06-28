@@ -1,5 +1,4 @@
 package com.mantletechsolutions.gatewayserver;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -22,8 +21,8 @@ public class GatewayserverApplication {
 				.route(p -> p
 						.path("/bank/accounts/**")
 						.filters( f -> f.rewritePath("/bank/accounts/(?<segment>.*)","/${segment}")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
-						.circuitBreaker(config->config.setName("accountsCircuitBreaker"))
+								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+						.circuitBreaker(config->config.setName("accountsCircuitBreaker")))
 						.uri("lb://ACCOUNTS"))
 				.route(p -> p
 						.path("/bank/loans/**")
